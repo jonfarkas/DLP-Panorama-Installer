@@ -71,19 +71,20 @@ snippets:
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
-#  - name: device_config_file
-#    cmd: parse
-#    variable: config
-#    outputs:
-#      - name: dlp_profile
-#        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
-     # - name: password_complexity
+  - name: device_config_file
+    cmd: parse
+    variable: config
+    outputs:
+      - name: dlp_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
+        filter_items: GDPR
+# - name: password_complexity
      #   capture_object: /config/mgt-config/password-complexity
 
 # check that Enterprise DLP pre-defined Data Patterns and Data Profiles are present and ready for use in Policy
-  #- name: GDPR_profile_test
-  #  label: Check for presence of Enteprise DLP GDPR Pata Profle
-  #  test: |
+#  - name: GDPR_profile_test
+#    label: Check for presence of Enteprise DLP GDPR Pata Profle
+#    test: |
   #    (
    #   dlp_profiles | filter_items:GDPR
   #    and dlp_profiles | tag_present('Driver License - Bulgaria')
