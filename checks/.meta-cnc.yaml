@@ -62,7 +62,7 @@ snippets:
     label: Cloud Services Version
     test: |
       (
-      cloud_services_plugin | {% float | "cloud_services_plugin" >= 1.5.0 %}
+      cloud_services_plugin | tag_value({% float | "cloud_services_plugin" >= 1.5.0 %})
       )
     fail_message: |
       Current plugin version is {{ cloud_services_plugin }}, please update Cloud Services plugin to 1.5.0 or greater
