@@ -62,10 +62,10 @@ snippets:
     label: Cloud Services Version
     test: |
       (
-      cloud_services_plugin | tag_present('cloud_service_plugin_version')
+      cloud_services_plugin | {% cloud_services_plugin >= 1.5.0 %}
       )
     fail_message: |
-      Current plugin version {{ cloud_services_plugin }} , please update Cloud Services Plugin to 1.5.0 or greater
+      Current plugin version {{ cloud_services_plugin }}, please update Cloud Services plugin to 1.5.0 or greater
     pass_message: Cloud Services Plugin ready
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
