@@ -75,8 +75,8 @@ snippets:
     cmd: parse
     variable: config
     outputs:
-      - name: dlp_profiles
-        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles
+      - name: dlp_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
      # - name: password_complexity
      #   capture_object: /config/mgt-config/password-complexity
 
@@ -85,8 +85,8 @@ snippets:
     label: Check for presence of Enteprise DLP GDPR Pata Profle
     test: |
       (
-      dlp_profiles | tag_present('GDPR')
-      and dlp_profiles | tag_present('Driver License - Bulgaria')
+      dlp_profiles | filter_items:GDPR
+  #    and dlp_profiles | tag_present('Driver License - Bulgaria')
       )
     fail_message: |
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
