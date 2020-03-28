@@ -55,7 +55,7 @@ snippets:
     cmd: cli
     cmd_str: show system info
     outputs:
-      - name: cloud_services_plugin
+      - name: cloud_services_plugin {{ "$%.f"|format(value|float) }}
         capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
 
   - name: cloud_services_version
