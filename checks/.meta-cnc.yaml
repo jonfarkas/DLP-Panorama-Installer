@@ -51,7 +51,7 @@ variables:
 # ---------------------------------------------------------------------
 snippets:
 # example output capture and test structure layout
-  - name: check_cloud_services_plugin
+  - name: system_info
     cmd: cli
     cmd_str: show system info
     outputs:
@@ -62,14 +62,13 @@ snippets:
     label: Cloud Services Version
     test: |
       (
-      ntp_servers | tag_present('primary-ntp-server.ntp-server-address')
-      and ntp_servers | tag_present('secondary-ntp-server.ntp-server-address')
+      cloud_services_plugin | tag_present('cloud_service_plugin_version')
       )
     fail_message: |
-      time server configuration is reccommended to ensure the firewall clock is in sync with external service and logging
+      Cloud Services Plugin Version 1.5.0 or greater is not currently installed
       platforms
-    pass_message: recommended primary and secondary ntp servers are configured
-    documentation_link: https://iron-skillet.readthedocs.io/en/docs_dev/viz_guide_panos.html#device-setup-services-services
+    pass_message: Cloud Services Plugin ready
+    documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
 # ---------------------------------------------------------------------
 # end of snippets section
