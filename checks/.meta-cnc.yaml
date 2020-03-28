@@ -53,7 +53,7 @@ snippets:
 # example output capture and test structure layout
   - name: check_cloud_services_plugin
     cmd: cli
-    cmd_str: cli
+    cmd_str: show system info
     outputs:
       - name: cloud_services_plugin
         capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
