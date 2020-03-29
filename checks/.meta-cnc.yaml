@@ -83,7 +83,7 @@ snippets:
 # check that Enterprise DLP pre-defined Data Patterns and Data Profiles are present and ready for use in Policy
   - name: GDPR_profile_test
     label: Check for presence of Enteprise DLP GDPR Pata Profle
-    test: dlp_profiles | attribute_present('entry', 'name', 'GDPR')
+    test: dlp_profiles | attribute_absent('entry', 'name', 'GDPR')
   #   (
   #    dlp_profiles | element_value_contains('GDPR')
   #    and dlp_profiles | tag_present('Driver License - Bulgaria')
