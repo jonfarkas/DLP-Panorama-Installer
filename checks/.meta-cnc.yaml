@@ -57,7 +57,7 @@ snippets:
     outputs:
       - name: cloud_services_plugin
         capture_object: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services
-      - name: cloud_service_plugin_test_debug
+      - name: cloud_service_plugin_debug
         capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
   - name: cloud_services_version
@@ -75,7 +75,7 @@ snippets:
 
   - name: check_version
     label: Check plugin version
-    test: cloud_services_plug == '1.5.0'
+    test: cloud_services_plugin_debug == '1.5.0'
     documentation_link: http://google.com
 
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
