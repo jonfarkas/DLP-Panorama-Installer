@@ -78,9 +78,9 @@ snippets:
     test: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.5'
     documentation_link: http://google.com
     fail_message: |
-      {{ cloud_services_plugin_debug }}
+      {{ cloud_service_plugin_debug }}
     pass_message: |
-      {{ cloud_services_plugin_debug }}
+      {{ cloud_service_plugin_debug }}
 
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
   - name: device_config_file
