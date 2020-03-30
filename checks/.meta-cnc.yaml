@@ -88,8 +88,23 @@ snippets:
     test: dlp_profile | attribute_present('entry', 'name', 'GDPR')
   #   (
   #    dlp_profiles | element_value_contains('GDPR')
-  #    and dlp_profiles | tag_present('Driver License - Bulgaria')
+  #    and dlp_profiles | _present('Driver License - Bulgaria')
   #    )
+    fail_message: |
+      Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
+      or contact your Palo Alto Networks Systems Engineer for assistance
+      {{ dlp_profile }}
+    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+  - name: GDPR_profile_test_2
+    label: Check for presence of pre-defined data pattern from Enterprise DLP Service
+    test: |
+     (
+  #    dlp_profiles | element_value_contains('GDPR')
+      dlp_profiles | attribute_present('entry', 'name', 'Driver License - Bulgaria')
+      )
     fail_message: |
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
       or contact your Palo Alto Networks Systems Engineer for assistance
