@@ -77,8 +77,10 @@ snippets:
     label: Check plugin version
     test: cloud_services_plugin_debug == '1.5.0'
     documentation_link: http://google.com
-    fail_message: {{ cloud_services_plugin_debug }}
-    pass_message: {{ cloud_services_plugin_debug }}
+    fail_message: |
+      {{ cloud_services_plugin_debug }}
+    pass_message: |
+      {{ cloud_services_plugin_debug }}
 
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
   - name: device_config_file
