@@ -64,7 +64,7 @@ snippets:
     label: Cloud Services Version
     test: |
       (
-      cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
+      (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.5'
       )
     fail_message: |
       Cloud Services Plugin not installed or does not support Enterprise DLP.
