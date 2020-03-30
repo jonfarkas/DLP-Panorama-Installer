@@ -51,20 +51,18 @@ variables:
 # ---------------------------------------------------------------------
 snippets:
 # test for Cloud Services Plugin 1.5.0 or greater
-  - name: system_info
-    cmd: cli
-    cmd_str: show system info
+  - name: cloud_services
+    cmd: parse
+    variable: config
     outputs:
       - name: cloud_services_plugin
-        capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
-      - name: plugin
-        capture_pattern: .
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services
 
   - name: cloud_services_version
     label: Cloud Services Version
     test: |
       (
-      cloud_services_plugin | element_value('1.5.0')
+      cloud_services_plugin | attribute_value('cloud_services', 'version', '1.5.0')
       )
     fail_message: |
       Current plugin version is {{ cloud_services_plugin }}, please update Cloud Services plugin to 1.5.0 or greater
