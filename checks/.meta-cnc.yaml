@@ -73,7 +73,7 @@ snippets:
     severity: High
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
-  - test: check_version
+  - name: check_version
     label: Check plugin version
     test: cloud_services_plug == '1.5.0'
     documentation_link: http://google.com
