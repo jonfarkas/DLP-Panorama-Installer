@@ -60,27 +60,27 @@ snippets:
       - name: cloud_service_plugin_debug
         capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
-  - name: cloud_services_version
-    label: Cloud Services Version
-    test: |
-      (
-      cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
-      )
-    fail_message: |
-      Cloud Services Plugin not installed or does not support Enterprise DLP.
-      Please update to Cloud Services Plugin version 1.5.0 or greater.
-    pass_message: Cloud Services Plugin 1.5.0 or greater found
-    severity: High
-    documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
+#  - name: cloud_services_version
+#    label: Cloud Services Version
+#    test: |
+#      (
+#      cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
+#      )
+#    fail_message: |
+#      Cloud Services Plugin not installed or does not support Enterprise DLP.
+#      Please update to Cloud Services Plugin version 1.5.0 or greater.
+#    pass_message: Cloud Services Plugin 1.5.0 or greater found
+#    severity: High
+#    documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
   - name: check_version
     label: Check plugin version
-    test: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.6'
-    documentation_link: http://google.com
+    test: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.5'
+    documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
     fail_message: |
-      {{ cloud_service_plugin_debug }}
+      Cloud Services Plugin version {{ cloud_service_plugin_debug }} fails requirement (1.5.0 or greater)
     pass_message: |
-      {{ cloud_service_plugin_debug }}
+      Cloud Services Plugin version {{ cloud_service_plugin_debug }} meets requirement (1.5.0 or greater)
 
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
   - name: device_config_file
@@ -93,7 +93,7 @@ snippets:
   - name: GDPR_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
+    when: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.5'
     test: |
      (
       dlp_profile | attribute_present('entry', 'name', 'GDPR')
