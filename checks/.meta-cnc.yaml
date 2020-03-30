@@ -55,9 +55,7 @@ snippets:
     cmd: parse
     variable: config
     outputs:
-      - name: cloud_services_plugin
-        capture_object: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services
-      - name: cloud_service_plugin_debug
+      - name: cloud_service_plugin
         capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
 #  - name: cloud_services_version
