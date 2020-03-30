@@ -57,6 +57,8 @@ snippets:
     outputs:
       - name: cloud_services_plugin
         capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
+      - name: plugin
+        capture_pattern: .
 
   - name: cloud_services_version
     label: Cloud Services Version
