@@ -65,8 +65,9 @@ snippets:
       cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
       )
     fail_message: |
-      Current plugin version is {{ cloud_services_plugin }}, please update Cloud Services plugin to 1.5.0 or greater
-    pass_message: Cloud Services Plugin {{ cloud_services_plugin }} installed
+      Cloud Services Plugin not installed or does not support Enterprise DLP.
+      Please update to Cloud Services Plugin version 1.5.0 or greater.
+    pass_message: Cloud Services Plugin 1.5.0 or greater found
     severity: High
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
@@ -80,12 +81,13 @@ snippets:
 
   - name: GDPR_profile_test
     label: Check for presence of pre-defined data pattern and data profile from Enterprise DLP Service
-    when: cloud_services_plugin | element_value('1.5.0')
+    when: cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
     test: |
      (
       dlp_profile | attribute_present('entry', 'name', 'GDPR')
       and dlp_profile | element_value('id') == '11995013'
       and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Bulgaria')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Austria')
      )
     fail_message: |
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
