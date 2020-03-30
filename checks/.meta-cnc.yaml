@@ -3,7 +3,7 @@
 # unique snippet name
 name: DLP-Verify-Panorama
 # label used for menu selection
-label: Verify Panorama is connectd to Enterprise DLP
+label: Verify Panorama is ready for Enterprise DLP
 description: |
   Skillet to test whether Panorama is connected to Enterprise DLP and ready
   to build policies leveraging advanced DLP Data Patterns and Data Profiles
