@@ -89,6 +89,18 @@ snippets:
       and dlp_profile | element_value('id') == '11995013'
       and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Bulgaria')
       and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Austria')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Belgium')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Germany')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Czech Republic')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Denmark')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Spain')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Bulgaria')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Austria')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Belgium')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Germany')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Czech Republic')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Denmark')
+      and dlp_profile | attribute_present('rule1.patterns.entry', 'name', 'Passport - Spain')
      )
     fail_message: |
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
