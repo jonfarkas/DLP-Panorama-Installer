@@ -57,6 +57,8 @@ snippets:
     outputs:
       - name: cloud_services_plugin
         capture_object: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services
+      - name: cloud_service_plugin_test_debug
+        capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
   - name: cloud_services_version
     label: Cloud Services Version
@@ -70,6 +72,11 @@ snippets:
     pass_message: Cloud Services Plugin 1.5.0 or greater found
     severity: High
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
+
+  - test: check_version
+    label: Check plugin version
+    test: cloud_services_plug == '1.5.0'
+    documentation_link: http://google.com
 
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
   - name: device_config_file
