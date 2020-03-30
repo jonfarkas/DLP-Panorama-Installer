@@ -58,7 +58,7 @@ snippets:
       - name: cloud_services_plugin
         capture_object: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services
       - name: cloud_service_plugin_debug
-        capture_list: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
+        capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
 
   - name: cloud_services_version
     label: Cloud Services Version
