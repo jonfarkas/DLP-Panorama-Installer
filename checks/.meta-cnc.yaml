@@ -8,46 +8,17 @@ description: |
   Skillet to test whether Panorama is connected to Enterprise DLP and ready
   to build policies leveraging advanced DLP Data Patterns and Data Profiles
 
-# type of device configuration
-# common types are panorama, panos, and template
-# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+
 type: pan_validation
-# preload static or default-based templates
-extends:
 
 # grouping of like snippets for dynamic menu creation in panhandler
 labels:
   collection:
     - DLP
+    - Validation
 
 # ---------------------------------------------------------------------
 # end of preamble section
-
-# variables section
-# ---------------------------------------------------------------------
-# variables used in the configuration templates
-# type_hint defines the form field used by panhandler
-# type_hints examples include text, ip_address, or dropdown
-
-# variables:
-#  - name: hostname
-#    description: Panorama hostname or IP address
-#    default: Panorama
-#    type_hint: text
-#  - name: choices
-#    description: sample dropdown list
-#    default: choices
-#    type_hint: dropdown
-#    dd_list:
-#      - key: option1
-#        value: option1
-#      - key: option2
-#        value: option2
-#  - name: snippets
-#    type_hint: hidden
-#    default: ''
-# ---------------------------------------------------------------------
-# end of variables section
 
 # snippets section
 # ---------------------------------------------------------------------
@@ -59,19 +30,6 @@ snippets:
     outputs:
       - name: cloud_service_plugin
         capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
-
-#  - name: cloud_services_version
-#    label: Cloud Services Version
-#    test: |
-#      (
-#      cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
-#      )
-#    fail_message: |
-#      Cloud Services Plugin not installed or does not support Enterprise DLP.
-#      Please update to Cloud Services Plugin version 1.5.0 or greater.
-#    pass_message: Cloud Services Plugin 1.5.0 or greater found
-#    severity: High
-#    documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
 
   - name: check_version
     label: Check plugin version
