@@ -80,7 +80,8 @@ snippets:
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
 
   - name: GDPR_profile_test
-    label: Check for presence of pre-defined data pattern and data profile from Enterprise DLP Service
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
     when: cloud_services_plugin | attribute_present('cloud_services', 'version', '1.5.0')
     test: |
      (
