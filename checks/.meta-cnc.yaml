@@ -75,7 +75,7 @@ snippets:
 
   - name: check_version
     label: Check plugin version
-    test: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.5'
+    test: (cloud_service_plugin_debug.split('.')[0] ~ '.' ~ cloud_service_plugin_debug.split('.')[1] | float ) >= '1.6'
     documentation_link: http://google.com
     fail_message: |
       {{ cloud_service_plugin_debug }}
