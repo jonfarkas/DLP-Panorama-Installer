@@ -79,27 +79,10 @@ snippets:
     outputs:
       - name: dlp_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
-# - name: password_complexity
-     #   capture_object: /config/mgt-config/password-complexity
-
-# check that Enterprise DLP pre-defined Data Patterns and Data Profiles are present and ready for use in Policy
-  # - name: GDPR_profile_test
-   # label: Check for presence of Enteprise DLP GDPR Pata Profle
-   # test: dlp_profile | attribute_present('entry', 'name', 'GDPR')
-  #   (
-  #    dlp_profiles | element_value_contains('GDPR')
-  #    and dlp_profiles | _present('Driver License - Bulgaria')
-  #    )
-    fail_message: |
-      Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
-      or contact your Palo Alto Networks Systems Engineer for assistance
-      {{ dlp_profile }}
-    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
-    severity: High
-    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
 
   - name: GDPR_profile_test
-    label: Check for presence of pre-defined data pattern from Enterprise DLP Service
+    label: Check for presence of pre-defined data pattern and data profile from Enterprise DLP Service
+    when: cloud_services_plugin | element_value('1.5.0')
     test: |
      (
       dlp_profile | attribute_present('entry', 'name', 'GDPR')
