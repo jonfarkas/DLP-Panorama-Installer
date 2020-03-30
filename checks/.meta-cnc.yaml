@@ -75,7 +75,7 @@ snippets:
 
   - name: check_version
     label: Check plugin version
-    test: cloud_service_plugin_version >= '1.5.0'
+    test: cloud_service_plugin_version >= 1.5.0
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
     fail_message: |
       Cloud Services Plugin version {{ cloud_service_plugin_debug }} fails requirement (1.5.0 or greater)
@@ -93,7 +93,7 @@ snippets:
   - name: GDPR_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: cloud_service_plugin_version >= '1.5.0'
+    when: cloud_service_plugin_version >= 1.5.0
     test: |
      (
       dlp_profile | attribute_present('entry', 'name', 'GDPR')
