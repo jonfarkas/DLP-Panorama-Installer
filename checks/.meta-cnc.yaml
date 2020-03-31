@@ -47,6 +47,9 @@ snippets:
     outputs:
       - name: GDPR_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
+      - name: BulkCCN_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Bulk CCN']
+
       - name: Garbage_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Garbage']
 
@@ -77,7 +80,20 @@ snippets:
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
       or contact your Palo Alto Networks Systems Engineer for assistance
       {{ GDPR_profile }}
-#    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
+    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+  - name: BulkCCN_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ( BulkCCN_profile is not none or BulkCCN_profile | element_value('id') != '11995001' )
+    test: false
+    fail_message: |
+      Enterprise DLP Garbage Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
+      or contact your Palo Alto Networks Systems Engineer for assistance
+
+    pass_message:
     severity: High
     documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
 
