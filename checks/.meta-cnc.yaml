@@ -87,7 +87,7 @@ snippets:
   - name: BulkCCN_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: ( BulkCCN_profile is not none or BulkCCN_profile | element_value('id') != '11995001' )
+    when: ( BulkCCN_profile is none or BulkCCN_profile | element_value('entry.id') != '11995001' )
     test: false
     fail_message: |
       Enterprise DLP Bulk CCN Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
@@ -100,7 +100,7 @@ snippets:
   - name: Garbage_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: ( Garbage_profile is not none or Garbage_profile | element_value('id') != '11995013' )
+    when: ( Garbage_profile is none or Garbage_profile | element_value('id') != '11995010' )
     test: false
     fail_message: |
       Enterprise DLP Garbage Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
