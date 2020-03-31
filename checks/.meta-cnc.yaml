@@ -80,17 +80,17 @@ snippets:
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
       or contact your Palo Alto Networks Systems Engineer for assistance
       {{ GDPR_profile }}
-    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
+#    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
     severity: High
     documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
 
   - name: BulkCCN_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: ( BulkCCN_profile is none or BulkCCN_profile | element_value('entry.id') != '11995001' )
+    when: ((GDPR_profile_test.results != true ) and ( BulkCCN_profile is none or BulkCCN_profile | element_value('entry.id') != '11995001' ))
     test: false
     fail_message: |
-      Enterprise DLP Bulk CCN Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
+      Enterprise DLP Bulk CCN Profile missing, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
       or contact your Palo Alto Networks Systems Engineer for assistance
 
     pass_message:
