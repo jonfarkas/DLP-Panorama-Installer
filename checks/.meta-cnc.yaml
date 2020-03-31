@@ -84,7 +84,7 @@ snippets:
   - name: Garbage_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: ( Garbage_profile is not None or Garbage_profile | element_value('id') != '11995013' )
+    when: ( Garbage_profile is not none or Garbage_profile | element_value('id') != '11995013' )
     test: false
     fail_message: |
       Enterprise DLP Garbage Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
