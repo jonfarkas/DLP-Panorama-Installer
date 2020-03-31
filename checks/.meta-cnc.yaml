@@ -90,7 +90,7 @@ snippets:
     when: ( BulkCCN_profile is not none or BulkCCN_profile | element_value('id') != '11995001' )
     test: false
     fail_message: |
-      Enterprise DLP Garbage Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
+      Enterprise DLP Bulk CCN Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
       or contact your Palo Alto Networks Systems Engineer for assistance
 
     pass_message:
