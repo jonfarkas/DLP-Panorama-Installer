@@ -40,6 +40,19 @@ snippets:
     pass_message: |
       Cloud Services Plugin version {{ cloud_service_plugin }} meets requirement (1.5.0 or greater)
 
+# Check if DLP Service has been provisioned and connected
+  - name: check_dlp
+    cmd: cli
+    cmd_str: request plugins cloud_services prisma-access dlp-provision-tenant
+    outputs:
+      - name: dlp_service_status
+        capture_value: msg
+        fail_message: |
+          Enterprise DLP Bulk CCN Profile missing, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
+          or contact your Palo Alto Networks Systems Engineer for assistance
+        pass_message: DLP Service is ready!
+        documentation_link: blah
+
 # Check for Enterprise DLP specific data pattern and data filtering profile objects
   - name: device_config_file
     cmd: parse
@@ -49,7 +62,9 @@ snippets:
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
       - name: BulkCCN_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Bulk CCN']
-
+      - name: BulkCCN_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Bulk CCN']
+      -
       - name: Garbage_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Garbage']
 
