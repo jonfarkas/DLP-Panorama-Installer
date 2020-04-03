@@ -283,7 +283,7 @@ snippets:
       Enterprise DLP has not been enabled, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
       or contact your Palo Alto Networks Systems Engineer for assistance
       {{ GDPR_profile }}
-#    pass_message: Enterprise DLP Data Pattenrs and Data Profles are ready for use in Policy
+    pass_message: Expected predefined Enterprise DLP Data Pattenrs and Data Profles found and are ready for use in Policy
     severity: High
     documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
 
