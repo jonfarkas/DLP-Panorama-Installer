@@ -40,9 +40,27 @@ snippets:
     pass_message: |
       Cloud Services Plugin version {{ cloud_service_plugin }} meets requirement (1.5.0 or greater)
 
+# Check for DLP Service Provisioning or request if not found
 
+  - name: check_dlp
+#   note that this command will request DLP trial if not already present
+    cmd: cli
+    cmd_str: request plugins cloud_services prisma-access dlp-provision-tenant
+    outputs:
+      - name: dlp_service_status
+        capture_value: msg
 
-# Check for Enterprise DLP specific data pattern and data filtering profile objects
+  - name: dlp_service
+    label: test for dlp
+    when: cloud_service_plugin >= '1.5.0'
+    test: dlp_service_status == 'DLP Provisioning Successful'
+    fail_message: |
+      {{ dlp_service_status }}
+    pass_message: |
+      {{ dlp_service_status }}
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Check for expected data filtering profiles from the Enterprise DLP service
   - name: device_config_file
     cmd: parse
     variable: config
@@ -51,12 +69,194 @@ snippets:
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GDPR']
       - name: BulkCCN_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Bulk CCN']
-      - name: BulkCCN_profile
-        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Bulk CCN']
-      -
+      - name: CorporateFinancialDocs_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Corporate Financial Docs']
+      - name: FinancialInformation_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Financial Information']
+      - name: GLBA_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='GLBA']
+      - name: Healthcare_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Healthcare']
+      - name: IntellectualProperty_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Intellectual Property']
+      - name: Legal_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Legal']
+      - name: Malware_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Malware']
+      - name: PII_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='PII']
+      - name: Profanity_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Profanity']
+      - name: SensitiveContent_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Sensitive Content']
+      - name: UKPIOCP_profile
+        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='U.K. PIOCP']
+
+#      - name: BulkCCN_profile
+#        capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Bulk CCN']
+#      -
       - name: Garbage_profile
         capture_object: /config/devices/entry[@name='localhost.localdomain']/device-group/entry[@name='Remote_Network_Device_Group']/profiles/dlp-data-profiles/entry[@name='Garbage']
 
+# Pre Defined Data Profile Tests
+
+# Bulk CCN
+
+  - name: BulkCCN_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( BulkCCN_profile is none ) or (BulkCCN_profile | attribute_absent('rule1.patterns.entry', 'name', 'Credit Card Number')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Bulk CCN profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Corporate Financial Docs
+
+  - name: CorpFinancialDocs_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( CorporateFinancialDocs_profile is none ) or (CorporateFinancialDocs_profile | attribute_absent('rule1.patterns.entry', 'name', 'Financial - Financial Accounting')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Corporate Financial Docs profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Financial Information
+
+  - name: FinancialInformation_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( FinancialInformation_profile is none ) or (FinancialInformation_profile | attribute_absent('rule1.patterns.entry', 'name', 'Bank - American Bankers Association Routing Number - ABA')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Financial Information profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# GLBA
+
+  - name: GLBA_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( GLBA_profile is none ) or (GLBA_profile | attribute_absent('rule1.patterns.entry', 'name', 'Credit Card Number')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP GLBA profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Healthcare
+
+  - name: Healthcare_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( Healthcare_profile is none ) or (Healthcare_profile | attribute_absent('rule1.patterns.entry', 'name', 'Health - CLIA')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Healthcare profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Intellectual Property
+
+  - name: CorpFinancialDocs_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( IntellectualProperty_profile is none ) or (IntellectualProperty_profile | attribute_absent('rule1.patterns.entry', 'name', 'Secret Key - AWS Access Key ID')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Intellectual Property profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Legal
+
+  - name: Legal_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( Legal_profile is none ) or (Legal_profile | attribute_absent('rule1.patterns.entry', 'name', 'Legal - Lawsuits')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Legal profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Malware
+
+  - name: Malware_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( Malware_profile is none ) or (Malware_profile | attribute_absent('rule1.patterns.entry', 'name', 'Wildfire')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Malware profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# PII
+
+  - name: PII_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( PII_profile is none ) or (PII_profile | attribute_absent('rule1.patterns.entry', 'name', 'Driver License - Austria')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP PII profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Profanity
+
+  - name: CorpFinancialDocs_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( Profanity_profile is none ) or (Profanity_profile | attribute_absent('rule1.patterns.entry', 'name', 'Profanity - Biological')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Profanity profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# Sensitive Content
+
+  - name: SensitiveContent_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( SensitiveContent_profile is none ) or (SensitiveContent_profile | attribute_absent('rule1.patterns.entry', 'name', 'Bank - American Bankers Association Routing Number - ABA')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP Sensitive Content profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# U.K. PIOCP
+
+  - name: CorpFinancialDocs_profile_test
+    label: Check for presence of pre-defined data pattern and
+            data profile from Enterprise DLP Service
+    when: ((dlp_service.results == false ) or ( UKPIOCP_profile is none ) or (UKPIOCP_profile | attribute_absent('rule1.patterns.entry', 'name', 'Tax Id - UK - UTR')))
+    test: false
+    fail_message: |
+      Predefined Enterprise DLP U.K. PIOCP profile not found, please contact TAC
+      or your Palo Alto Networks Systems Engineer for assistance
+    severity: High
+    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
+
+# GDPR
   - name: GDPR_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
@@ -64,7 +264,6 @@ snippets:
     test: |
      (
       GDPR_profile | attribute_present('entry', 'name', 'GDPR')
-      and GDPR_profile | element_value('id') == '11995013'
       and GDPR_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Bulgaria')
       and GDPR_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Austria')
       and GDPR_profile | attribute_present('rule1.patterns.entry', 'name', 'Driver License - Belgium')
@@ -88,30 +287,5 @@ snippets:
     severity: High
     documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
 
-  - name: BulkCCN_profile_test
-    label: Check for presence of pre-defined data pattern and
-            data profile from Enterprise DLP Service
-    when: ((GDPR_profile_test.results != true ) and ( BulkCCN_profile is none or BulkCCN_profile | element_value('entry.id') != '11995001' ))
-    test: false
-    fail_message: |
-      Enterprise DLP Bulk CCN Profile missing, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
-      or contact your Palo Alto Networks Systems Engineer for assistance
-
-    pass_message:
-    severity: High
-    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
-
-  - name: Garbage_profile_test
-    label: Check for presence of pre-defined data pattern and
-            data profile from Enterprise DLP Service
-    when: ( Garbage_profile is none or Garbage_profile | element_value('id') != '11995010' )
-    test: false
-    fail_message: |
-      Enterprise DLP Garbage Profile mising, please request trial from Panorama > Cloud Services Configuration (Setup Tab)
-      or contact your Palo Alto Networks Systems Engineer for assistance
-
-    pass_message:
-    severity: High
-    documentation_link: https://www.paloaltonetworks.com/resources/datasheets/enterprise-data-loss-prevention
 # ---------------------------------------------------------------------
 # end of snippets section
