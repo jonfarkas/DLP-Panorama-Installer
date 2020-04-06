@@ -28,7 +28,10 @@ variables:
     description: Password
     default: admin
     type_hint: password
-
+  - name: cloud_service_plugin
+    description: cloud services plugin version
+    default:
+    type_hint: disabled
 
 # Snippets is an ordered list of configuration xml fragments that will be pushed to the PAN-OS NGFW. The xpath
 # determines where in the configuration hierarchy the xml fragment will be set. 'file' indicates the name of the file
