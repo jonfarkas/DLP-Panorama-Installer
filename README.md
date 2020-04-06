@@ -1,6 +1,6 @@
 # Panorama DLP Installer
-Skillet to configure Panorama for use with the Enterprise DLP Service 
-and validate when ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
+## Skillet to configure Panorama for use with the Enterprise DLP Service 
+## and validate when ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
 
 This Skillet should ONLY be run against Panorama 
 
@@ -34,3 +34,26 @@ Predefined Data patterns that are checked:
     - U.K. PIOCP
 
 If any of the above profiles are missing, the skillet will list out each missing predefined skillet is not found.
+
+## Authors
+
+* Jon Farkas ([@jonfarkas](https://github.com/jonfarkas)) 
+* Scott Shoaf ([@scotchoaf](https://github.com/scotchoaf))
+* Nathan Embery ([@nembery](https://github.com/nembery))
+
+## Support Policy
+
+The code and templates in the repo are released under an as-is, best effort,
+support policy. These scripts should be seen as community supported and
+Palo Alto Networks will contribute our expertise as and when possible.
+We do not provide technical support or help in using or troubleshooting the
+components of the project through our normal support options such as
+Palo Alto Networks support teams, or ASC (Authorized Support Centers)
+partners and backline support options. The underlying product used
+(the VM-Series firewall) by the scripts or templates are still supported,
+but the support is only for the product functionality and not for help in
+deploying or using the template or script itself. Unless explicitly tagged,
+all projects or work posted in our GitHub repository
+(at https://github.com/PaloAltoNetworks) or sites other than our official
+Downloads page on https://support.paloaltonetworks.com are provided under
+the best effort policy.
