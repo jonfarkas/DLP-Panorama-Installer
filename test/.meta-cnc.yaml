@@ -4,29 +4,21 @@ label: Checks the Cloud Services Plugin version on Panorama
 
 description: |
   Get Cloud Services Plugin from Panorama
-type: panos
+type: rest
 
 labels:
   collection:
     - DLP
 
-variables:
-  - name: cli_command
-    description: CLI Command
-    default: show system info
-    type_hint: hidden
+#variables:
+#  - name: cli_command
+#    description: CLI Command
+#    default: show system info
+#    type_hint: hidden
 snippets:
-  - name: check_hostname
-    cmd: cli
-    cmd_str: '{{ cli_command }}'
-    output_type: text
-    outputs:
-      - name: cli_output
-  - name: convert_output_version
-    cmd: parse
-    variable: cli_output
-    output_type: xml
-    outputs:
-      - name: cloud_service_plugin
-        capture_value: ./plugin_versions/entry[@name='cloud_services']/@version
-
+  - name: check_cloud_service_plugin_version
+      cmd: cli
+      cmd_str: show system info
+      outputs:
+        - name: cloud_service_plugin
+          capture_pattern: ./plugin_versions/entry[@name="cloud_services"]/@version
