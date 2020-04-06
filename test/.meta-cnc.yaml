@@ -35,7 +35,7 @@ snippets:
   - name: cloud_services
     cmd: parse
     variable: config
-    output_type=xml
+    output_type: xml
     outputs:
       - name: cloud_service_plugin
         capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
