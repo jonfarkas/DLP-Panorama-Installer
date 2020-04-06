@@ -2,7 +2,7 @@ name: DLP-Panorama-Install
 
 # label used for menu selection
 label: |
-  Verifies dependencies, installs Cloud Services Plugin, and requests Enterprise DLP Service Trial
+  Configure Panorama for Enterprise DLP Service Trial
 
 description: |
   This skillet will check that Panorama has the latest content, cloud services plugin 1.5.0, and DLP service is connected.
