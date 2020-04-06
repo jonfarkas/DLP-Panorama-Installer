@@ -9,7 +9,7 @@ type: docker
 labels:
   order: 10
   collection:
-    - DLP
+    - lib
 
 variables:
   - name: TARGET_IP

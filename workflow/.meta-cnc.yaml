@@ -11,6 +11,7 @@ type: workflow
 
 # Labels allow grouping and type specific options and are generally only used in advanced cases
 labels:
+  order: 1
   collection: DLP
 
 # variables define the things an operator may customize in this skillet. Things like DNS servers, NTP addresses, etc
