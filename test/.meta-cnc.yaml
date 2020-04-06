@@ -27,6 +27,6 @@ snippets:
     variable: cli_output
     output_type: xml
     outputs:
-      - name: cli_output_as_object
+      - name: cloud_service_plugin
         capture_value: ./plugin_versions/entry[@name='cloud_services']/@version
 
