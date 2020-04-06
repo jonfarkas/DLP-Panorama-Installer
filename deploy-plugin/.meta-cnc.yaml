@@ -24,6 +24,10 @@ variables:
     description: Panorama Password
     default: admin
     type_hint: hidden
+  - name: cloud_service_plugin
+    description: cloud services plugin version
+    default:
+    type_hint: hidden
 
 snippets:
   - name: ansible_test
