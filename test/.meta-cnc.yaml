@@ -32,10 +32,10 @@ snippets:
       - name: api_key
         capture_pattern: result/key
 
-  - name: get_cloud_service_plugin
-    path: |
-      https://{{ TARGET_IP }}/api/?type=op&cmd=<show><plugins><cloud_services></cloud_services></plugins></show>&key={{ api_key }}
-    output_type: xml
+  - name: cloud_services
+    cmd: parse
+    variable: config
     outputs:
       - name: cloud_service_plugin
-        capture_pattern: ./completions/completion//@value
+        capture_value: /config/devices/entry[@name='localhost.localdomain']/plugins/cloud_services/@version
+
