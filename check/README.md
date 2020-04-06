@@ -1,70 +1,32 @@
-# part of the panhandler application with docs at
-# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+## Validation Skillet for Panorama - DLP Service Checks
+This skillet will perform the following validations / steps in sequence:
+1. Checks for Cloud Services Plugin version 1.5.0 or greater
+2. Checks for DLP Service Provisioning in Panorama (note that this step will also request a trial of the DLP Service if not connected)
+3. Checks for the presence of expected predefined Data Profiles and Data Patterns
+    - Output is limited to only missing items, otherwise will show a summary success message
 
-# unique snippet name
-name: DLP-Verify
-# label used for menu selection
-label: DLP Validation Skillet
-description: |
-  Used in panhandler to This will take any snippets
-  created earlier and and display them inline.
+If step 1 should fail, the workflow skillet will call the dlp-install-cloud-services-plugin skillet 
+to install Cloud Services Plugin 1.5.0, then re-run this skillet. 
 
-type: template
+## Authors
 
-# grouping of like snippets for dynamic menu creation in panhandler
-labels:
-  collection:
-   - Kitchen Sink
+* Jon Farkas ([@jonfarkas](https://github.com/jonfarkas)) 
+* Scott Shoaf ([@scotchoaf](https://github.com/scotchoaf))
+* Nathan Embery ([@nembery](https://github.com/nembery))
 
-# variables used in the configuration templates
-# type_hint defines the form field used by panhandler
-# type_hints can be text, ip_address, or dropdown
-variables:
-  - name: skillet_name
-    description: Skillet ID
-    default: mySkillet
-    type_hint: text
-  - name: skillet_label
-    description: Skillet label (selection name in panhandler)
-    default: my_skillet_label
-    type_hint: text
-  - name: skillet_description
-    description: Skillet Description
-    default: this is what my skillet does
-    type_hint: text
-  - name: collection_name
-    description: Collection Name (aka grouping name)
-    default: myCollection
-    type_hint: text
-  - name: skillet_type
-    description: Skillet type (action taken by panhandler on Submit)
-    default: panos
-    type_hint: dropdown
-    dd_list:
-      - key: panos
-        value: panos
-      - key: panorama
-        value: panorama
-      - key: panorama-gpcs
-        value: panorama-gpcs
-      - key: template
-        value: template
-      - key: rest
-        value: rest
-      - key: python
-        value: python
-      - key: terraform
-        value: terraform
-  - name: snippets
-    type_hint: hidden
-    default: ''
+## Support Policy
 
-# snippets used for api configuration including xpath and element as file name
-# files will load in the order listed
-snippets:
-  - name: meta-cnc-skeleton.conf
-    file: meta-cnc-skeleton.conf
-    template_title: Generated Skillet
-    output_type: text
-    outputs:
-      - name: SKILLET_CONTENT
+The code and templates in the repo are released under an as-is, best effort,
+support policy. These scripts should be seen as community supported and
+Palo Alto Networks will contribute our expertise as and when possible.
+We do not provide technical support or help in using or troubleshooting the
+components of the project through our normal support options such as
+Palo Alto Networks support teams, or ASC (Authorized Support Centers)
+partners and backline support options. The underlying product used
+(the VM-Series firewall) by the scripts or templates are still supported,
+but the support is only for the product functionality and not for help in
+deploying or using the template or script itself. Unless explicitly tagged,
+all projects or work posted in our GitHub repository
+(at https://github.com/PaloAltoNetworks) or sites other than our official
+Downloads page on https://support.paloaltonetworks.com are provided under
+the best effort policy.
