@@ -27,7 +27,7 @@ variables:
   - name: cloud_service_plugin
     description: cloud services plugin version
     default:
-    type_hint: hidden
+    type_hint: disabled
 
 snippets:
   - name: ansible_test
