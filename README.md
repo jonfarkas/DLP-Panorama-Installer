@@ -1,6 +1,6 @@
 # Panorama DLP Installer
 ## Skillet to configure Panorama for use with the Enterprise DLP Service 
-## and validate when ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
+and validate when ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
 
 This Skillet should ONLY be run against Panorama 
 
@@ -9,6 +9,7 @@ This Skillet performs the following tasks in sequence, and will stop upon failur
     - If needed, calls the dlp-install-cloud-services-plugin to install Cloud Services Plugin v 1.5.0
 
 2. Checks that Panorama has a connection to the Enterprise DLP service
+
 ***Important Note*** : If the DLP service trial has not been requested in Panorama, the same
 command that checks will also request a trial of the DLP service.  
 DO NOT RUN THIS SKILLET IF YOU DO NOT WANT TO CONNECT TO THE DLP SERVICE
