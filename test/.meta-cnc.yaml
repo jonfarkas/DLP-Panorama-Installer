@@ -1,13 +1,13 @@
-name: DLP-Panorama-Install
+name: DLP-Panorama-Install-test
 
 # label used for menu selection
 label: |
-  Verifies dependencies, installs Cloud Services Plugin, and requests Enterprise DLP Service Trial
+  tests logic
 
 description: |
   This skillet will check that Panorama has the latest content, cloud services plugin 1.5.0, and DLP service is connected.
   If any of these are missing, the skillet will perform the steps to get Panorama concencted to the DLP service.
-type: workflow
+type: template
 
 # Labels allow grouping and type specific options and are generally only used in advanced cases
 labels:
@@ -39,6 +39,6 @@ variables:
 # in the 'variables' section.
 snippets:
 #  - name: DLP-Verify-Panorama
-  - name: DLP-Panorama-Install-test
-    when: cloud_service_plugin < '1.5.0'
+  - name: test-logic
+    file: testlogic.txt
 #  - name: DLP-Verify-Panorama

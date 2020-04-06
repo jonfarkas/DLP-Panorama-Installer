@@ -1,0 +1,2 @@
+This is a test, have a good day!
+{{ cloud_service_plugin }}
