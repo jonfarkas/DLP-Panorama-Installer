@@ -30,15 +30,15 @@ variables:
     type_hint: password
   - name: cloud_service_plugin
     description: plugin_version
-    default: 1.5.0
-    type_hint: text
+    default:
+    type_hint: disabled
 
 # Snippets is an ordered list of configuration xml fragments that will be pushed to the PAN-OS NGFW. The xpath
 # determines where in the configuration hierarchy the xml fragment will be set. 'file' indicates the name of the file
 # to load and parse. Jinja2 style variables will be variable interpolated using the values of the 'variables' defined
 # in the 'variables' section.
 snippets:
-#  - name: DLP-Verify-Panorama
-  - name: DLP-Panorama-Install-test
+  - name: DLP-Verify-Panorama
+  - name: DLP-Panorama-Install
     when: cloud_service_plugin < '1.5.0'
-#  - name: DLP-Verify-Panorama
+  - name: DLP-Verify-Panorama
