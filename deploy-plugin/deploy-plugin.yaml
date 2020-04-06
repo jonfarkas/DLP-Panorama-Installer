@@ -1,0 +1,94 @@
+- name: Configure Panorama instance for DLP using Cloud Serives Plugin 1.5.0
+  hosts: all
+  connection: local
+  gather_facts: False
+
+  roles:
+    - role: PaloAltoNetworks.paloaltonetworks
+
+  tasks:
+    - name: Debug Provider Info
+      debug: msg='{{ provider }}'
+
+
+    # borrowed from https://github.com/mrichardson03/ansible-pan-samples/blob/master/upgrade_content.yml
+    - name: Check latest content
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'request content upgrade check'
+      register: check
+      changed_when: False
+
+    - name: Download latest content
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: |
+          <request><content><upgrade><download>
+          <latest></latest>
+          </download></upgrade></content></request>
+        cmd_is_xml: True
+      register: download
+
+    - name: Check content download result
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'show jobs id {{ (download.stdout | from_json).response.result.job }}'
+      register: download_job
+      until: download_job is not failed and (download_job.stdout | from_json).response.result.job.status == 'FIN'
+      retries: 10
+      delay: 60
+
+    - name: Install latest content
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: |
+          <request><content><upgrade><install>
+          <version>latest</version>
+          </install></upgrade></content></request>
+        cmd_is_xml: True
+      register: install
+
+    - name: Check content install result
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'show jobs id {{ (install.stdout | from_json).response.result.job }}'
+      register: install_job
+      until: install_job is not failed and (install_job.stdout | from_json).response.result.job.status == 'FIN'
+      retries: 10
+      delay: 60
+
+    - name: Check Plugins
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'request plugins check'
+      register: plugin_download
+
+    - name: Download Cloud Services Plugin
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'request plugins download file cloud_services-1.5.0'
+      register: plugin_download
+
+    - name: Check Cloud Services Plugin Download
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'show jobs id {{ (plugin_download.stdout | from_json).response.result.job }}'
+      register: plugin_download_job
+      until: plugin_download_job is not failed and (plugin_download_job.stdout | from_json).response.result.job.status == 'FIN'
+      retries: 10
+      delay: 60
+
+    - name: Install Cloud Services Plugin
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'request plugins install cloud_services-1.5.0'
+      register: plugin_install
+
+    - name: Check Cloud Services Plugin Install
+      panos_op:
+        provider: '{{ provider }}'
+        cmd: 'show jobs id {{ (plugin_install.stdout | from_json).response.result.job }}'
+      register: plugin_install_job
+      until: plugin_install_job is not failed and (plugin_install_job.stdout | from_json).response.result.job.status == 'FIN'
+      retries: 10
+      delay: 60

@@ -1,0 +1,34 @@
+name: dlp-install-cloud-services-plugin
+
+label: Panorama Initial Configuration
+
+description: installs Cloud Services Plugin on Panorama
+
+type: docker
+
+labels:
+  order: 10
+  collection:
+    - DLP
+
+variables:
+  - name: TARGET_IP
+    description: Panorama Public IP Address
+    default: 10.10.10.10
+    type_hint: hidden
+  - name: TARGET_USERNAME
+    description: Panorama Username
+    default: admin
+    type_hint: hidden
+  - name: TARGET_PASSWORD
+    description: Panorama Password
+    default: admin
+    type_hint: hidden
+
+snippets:
+  - name: ansible_test
+    image: nembery/pantools:min
+    async: True
+    cmd: |
+      ansible-playbook -i 'panorama-1,' deploy-plugin.yaml
+      -e '{"provider": {"ip_address": "{{ TARGET_IP }}", "username": "{{ TARGET_USERNAME }}", "password": "{{ TARGET_PASSWORD }}"}}'
