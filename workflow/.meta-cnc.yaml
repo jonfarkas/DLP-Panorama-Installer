@@ -42,3 +42,4 @@ snippets:
   - name: DLP-Panorama-Install
     when: cloud_service_plugin < '1.5.0'
   - name: DLP-Verify-Panorama
+    when: cloud_service_plugin < '1.5.0'
