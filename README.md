@@ -1,5 +1,5 @@
 # Panorama DLP Installer
-## Skillet to configure Panorama for use with the Enterprise DLP Service and validate when ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
+## Skillet to configure Panorama for use with the Enterprise DLP Service & validate Panorama is ready to build policies using advanced DLP Data Profiles and Data Patterns
 
 ***This Skillet should ONLY be run against Panorama***
 
