@@ -1,13 +1,12 @@
-# DLP-Verify-Panorama
-Validation Skillet to test whether Panorama is connected to the Enterprise DLP Service 
-and ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
+# Panorama DLP Installer
+Skillet to configure Panorama for use with the Enterprise DLP Service 
+and validate when ready to build policies leveraging advanced DLP Data Profiles and Data Patterns
 
 This Skillet should ONLY be run against Panorama 
 
-
-
 This Skillet performs the following tasks in sequence, and will stop upon failure at any step:
-1. Checks that the Cloud Services Plugin version 1.5.0 or greater is installed on Panoramaa
+1. Checks that the Cloud Services Plugin version 1.5.0 or greater is installed on Panorama
+    - If needed, calls the dlp-install-cloud-services-plugin to install Cloud Services Plugin v 1.5.0
 
 2. Checks that Panorama has a connection to the Enterprise DLP service
 ***Important Note*** : If the DLP service trial has not been requested in Panorama, the same
