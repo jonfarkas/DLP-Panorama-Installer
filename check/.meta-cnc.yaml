@@ -19,6 +19,11 @@ labels:
 
 # ---------------------------------------------------------------------
 # end of preamble section
+variables:
+  - name: cloud_service_plugin
+    description: cloud services plugin version
+    default:
+    type_hint: disabled
 
 # snippets section
 # ---------------------------------------------------------------------
