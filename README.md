@@ -19,6 +19,7 @@ are seen in the device group "Remote_Network_Device_Group" (this device group is
 services plugin) with expected data patterns referenced in their first rule.  
 
 Predefined Data patterns that are checked:
+
     - Bulk CCN
     - Corporate Financial Docs
     - Financial Information
