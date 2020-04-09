@@ -9,7 +9,7 @@ This Skillet performs the following tasks in sequence, and will stop upon failur
 
 2. Checks that Panorama has a connection to the Enterprise DLP service
 
-*Important Note* : If the DLP service trial has not been requested in Panorama, the same
+****Important Note**** : If the DLP service trial has not been requested in Panorama, the same
 command that checks will also request a trial of the DLP service.  
 DO NOT RUN THIS SKILLET IF YOU DO NOT WANT TO CONNECT TO THE DLP SERVICE
 (but then, why would you be running this skillet, right?)
