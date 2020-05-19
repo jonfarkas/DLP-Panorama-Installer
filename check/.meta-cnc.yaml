@@ -28,7 +28,7 @@ variables:
 # snippets section
 # ---------------------------------------------------------------------
 snippets:
-# test for Cloud Services Plugin 1.5.0 or greater
+# test for Cloud Services Plugin 1.6.0 or greater
   - name: cloud_services
     cmd: parse
     variable: config
@@ -38,12 +38,12 @@ snippets:
 
   - name: check_version
     label: Check plugin version
-    test: cloud_service_plugin >= '1.5.0'
+    test: cloud_service_plugin >= '1.6.0'
     documentation_link: https://docs.paloaltonetworks.com/prisma/prisma-access/prisma-access-panorama-release-notes/prisma-access-about/upgrade-cloud-services-plugin
     fail_message: |
-      Cloud Services Plugin version {{ cloud_service_plugin }} fails requirement (1.5.0 or greater)
+      Cloud Services Plugin version {{ cloud_service_plugin }} fails requirement (1.6.0 or greater)
     pass_message: |
-      Cloud Services Plugin version {{ cloud_service_plugin }} meets requirement (1.5.0 or greater)
+      Cloud Services Plugin version {{ cloud_service_plugin }} meets requirement (1.6.0 or greater)
 
 # Check for DLP Service Provisioning or request if not found
 
@@ -57,7 +57,7 @@ snippets:
 
   - name: dlp_service
     label: Test for connection to DLP Service
-    when: cloud_service_plugin >= '1.5.0'
+    when: cloud_service_plugin >= '1.6.0'
     test: dlp_service_status == 'DLP Provisioning Successful'
     fail_message: |
       {{ dlp_service_status }}
@@ -265,7 +265,7 @@ snippets:
   - name: GDPR_profile_test
     label: Check for presence of pre-defined data pattern and
             data profile from Enterprise DLP Service
-    when: cloud_service_plugin >= '1.5.0'
+    when: cloud_service_plugin >= '1.6.0'
     test: |
      (
       GDPR_profile | attribute_present('entry', 'name', 'GDPR')

@@ -4,8 +4,8 @@
 ***This Skillet should ONLY be run against Panorama!***
 
 This Skillet performs the following tasks in sequence, and will stop upon failure at any step:
-1. Checks that the Cloud Services Plugin version 1.5.0 or greater is installed on Panorama
-    - If needed, calls the dlp-install-cloud-services-plugin to install Cloud Services Plugin v 1.5.0
+1. Checks that the Cloud Services Plugin version 1.6.0 or greater is installed on Panorama
+    - If needed, calls the dlp-install-cloud-services-plugin to install Cloud Services Plugin v 1.6.0
 
 2. Checks that Panorama has a connection to the Enterprise DLP service
 

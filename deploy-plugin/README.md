@@ -1,4 +1,4 @@
-## Cloud Services Plugin 1.5.0 installer skillet 
+## Cloud Services Plugin 1.6.0 installer skillet 
 This skillet will call the ansible playbook to install the latest content and Cloud Services Plugin
 
 ## Authors

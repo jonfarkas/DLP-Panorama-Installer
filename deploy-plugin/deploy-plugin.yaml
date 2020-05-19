@@ -1,4 +1,4 @@
-- name: Configure Panorama instance for DLP using Cloud Serives Plugin 1.5.0
+- name: Configure Panorama instance for DLP using Cloud Serives Plugin 1.6.0
   hosts: all
   connection: local
   gather_facts: False
@@ -66,7 +66,7 @@
     - name: Download Cloud Services Plugin
       panos_op:
         provider: '{{ provider }}'
-        cmd: 'request plugins download file cloud_services-1.5.0'
+        cmd: 'request plugins download file cloud_services-1.6.0'
       register: plugin_download
 
     - name: Check Cloud Services Plugin Download
@@ -81,7 +81,7 @@
     - name: Install Cloud Services Plugin
       panos_op:
         provider: '{{ provider }}'
-        cmd: 'request plugins install cloud_services-1.5.0'
+        cmd: 'request plugins install cloud_services-1.6.0'
       register: plugin_install
 
     - name: Check Cloud Services Plugin Install

@@ -1,12 +1,12 @@
 ## Validation Skillet for Panorama - DLP Service Checks
 This skillet will perform the following validations / steps in sequence:
-1. Checks for Cloud Services Plugin version 1.5.0 or greater
+1. Checks for Cloud Services Plugin version 1.6.0 or greater
 2. Checks for DLP Service Provisioning in Panorama (note that this step will also request a trial of the DLP Service if not connected)
 3. Checks for the presence of expected predefined Data Profiles and Data Patterns
     - Output is limited to only missing items, otherwise will show a summary success message
 
 If step 1 should fail, the workflow skillet will call the dlp-install-cloud-services-plugin skillet 
-to install Cloud Services Plugin 1.5.0, then re-run this skillet. 
+to install Cloud Services Plugin 1.6.0, then re-run this skillet. 
 
 ## Authors
 

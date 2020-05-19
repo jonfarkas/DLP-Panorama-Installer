@@ -5,7 +5,7 @@ label: |
   Configure Panorama for Enterprise DLP Service Trial
 
 description: |
-  This skillet will check that Panorama has the latest content, cloud services plugin 1.5.0, and DLP service is connected.
+  This skillet will check that Panorama has the latest content, cloud services plugin 1.6.0, and DLP service is connected.
   If any of these are missing, the skillet will perform the steps to get Panorama concencted to the DLP service.
 type: workflow
 
@@ -42,6 +42,6 @@ snippets:
   - name: get_cloud_services_plugin_version
   - name: DLP-Verify-Panorama
   - name: DLP-Panorama-Install
-    when: cloud_service_plugin < '1.5.0'
+    when: cloud_service_plugin < '1.6.0'
   - name: DLP-Verify-Panorama
-    when: cloud_service_plugin < '1.5.0'
+    when: cloud_service_plugin < '1.6.0'
